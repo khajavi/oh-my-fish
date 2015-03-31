@@ -429,3 +429,14 @@ else
         start_agent
     end  
 end
+
+
+function transfer
+ set -l tmpfile ( mktemp -t transferXXX )
+ set y (basename $argv[1])
+ echo $argv[1]
+ curl --progress-bar --upload-file $argv[1] https://transfer.sh/(basename $argv[1]) >>  $tmpfile
+ cat $tmpfile
+ rm -f $tmpfile
+end
+
